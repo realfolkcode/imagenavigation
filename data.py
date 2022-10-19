@@ -59,7 +59,7 @@ class ObservationDataset(DGLBuiltinDataset):
         edges = []
         for a in actions:
             edges.append(int(a[6:]))
-        edges = torch.Tensor(edges)
+        edges = torch.LongTensor(edges)
         return graph, edges
     
     def __len__(self):
