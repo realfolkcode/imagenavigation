@@ -15,6 +15,7 @@ class ObservationDataset(DGLBuiltinDataset):
         self.model = model
         self.photo_names = {}
         self.transform = transform
+        self.train_test_ratio = 0.8
         super().__init__(name='obs',
                          url=None)
     
@@ -30,6 +31,11 @@ class ObservationDataset(DGLBuiltinDataset):
                     if os.path.isdir(action_dir):
                         state_dict[action] = list(filter(lambda x : x.endswith('jpeg'), 
                                                          os.listdir(action_dir)))
+                        dict_cutoff = int(self.train_test_ratio * len(state_dict[action]))
+                        if self.kind == 'train':
+                            state_dict[action] = state_dict[action][:dict_cutoff]
+                        elif self.kind == 'test':
+                            state_dict[action] = state_dict[action][dict_cutoff:]
                 self.photo_names[state] = state_dict
     
     def __getitem__(self, idx):
