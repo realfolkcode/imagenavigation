@@ -11,6 +11,7 @@ from utils import process_image
 class ObservationDataset(DGLBuiltinDataset):
     def __init__(self, data_dir, kind, feature_extractor, model, transform=None):
         self.data_dir = data_dir
+        self.kind = kind
         self.feature_extractor = feature_extractor
         self.model = model
         self.photo_names = {}
