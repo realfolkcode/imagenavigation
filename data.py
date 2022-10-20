@@ -21,9 +21,9 @@ class ObservationDataset(DGLBuiltinDataset):
     def process(self):
         # Traverse data_dir
 
-        for state in os.listdir(data_dir):
+        for state in os.listdir(self.data_dir):
             state_dict = {}
-            state_dir = os.path.join(data_dir, state)
+            state_dir = os.path.join(self.data_dir, state)
             if os.path.isdir(state_dir) and state.startswith('state'):
                 for action in os.listdir(state_dir):
                     action_dir = os.path.join(state_dir, action)
