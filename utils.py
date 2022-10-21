@@ -37,7 +37,7 @@ def build_map(dataset):
 
 
 def get_reward_table(graph_map):
-    terminal_state = len(graph_map)
+    terminal_state = len(graph_map) - 1
     reward_table = dict(nx.single_target_shortest_path_length(graph_map, terminal_state))
     for node in reward_table:
         reward_table[node] *= -1
