@@ -15,7 +15,7 @@ def process_image(feature_extractor, model, image_batch, transform):
 
 
 def build_map(dataset):
-    graph_map = nx.Graph()
+    graph_map = nx.DiGraph()
 
     # Add nodes
     for state in dataset.photo_names:
