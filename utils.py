@@ -34,3 +34,11 @@ def build_map(dataset):
                 v = int(action[6:])
             graph_map.add_edge(u, v)
     return graph_map
+
+
+def reward_table(graph_map):
+    terminal_state = len(graph_map)
+    reward_table = dict(nx.single_target_shortest_path_length(graph_map, terminal_state))
+    for node in reward_table:
+        reward_table[node] *= -1
+    return reward_table
