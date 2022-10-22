@@ -41,4 +41,5 @@ def get_reward_table(graph_map):
     reward_table = dict(nx.single_target_shortest_path_length(graph_map, terminal_state))
     for node in reward_table:
         reward_table[node] *= -1
+    reward_table = [x[1] for x in sorted(reward_table.items())]
     return reward_table
