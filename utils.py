@@ -21,17 +21,12 @@ def build_map(dataset):
     for state in dataset.photo_names:
         u = int(state[5:])
         graph_map.add_node(u)
-    terminal_state = len(graph_map)
-    graph_map.add_node(terminal_state)
 
     # Add edges
     for state in dataset.photo_names:
         u = int(state[5:])
         for action in dataset.photo_names[state]:
-            if action == 'terminal':
-                v = terminal_state
-            else:
-                v = int(action[6:])
+            v = int(action[6:])
             graph_map.add_edge(u, v)
     return graph_map
 
