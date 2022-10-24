@@ -1,5 +1,8 @@
 import torch
 import networkx as nx
+import numpy as np
+import dgl
+import random
 
 
 def process_image(feature_extractor, model, image_batch, transform):
@@ -38,3 +41,16 @@ def get_reward_table(graph_map):
         reward_table[node] *= -1
     reward_table = [x[1] for x in sorted(reward_table.items())]
     return reward_table
+
+
+def set_random_seeds(seed_value=0, device='cpu'):
+    '''source https://forums.fast.ai/t/solved-reproducibility-where-is-the-randomness-coming-in/31628/5'''
+    np.random.seed(seed_value)
+    torch.manual_seed(seed_value)
+    random.seed(seed_value)
+    dgl.seed(seed_value)
+    if device != 'cpu':
+        torch.cuda.manual_seed(seed_value)
+        torch.cuda.manual_seed_all(seed_value)
+        torch.backends.cudnn.deterministic = True
+        torch.backends.cudnn.benchmark = False
