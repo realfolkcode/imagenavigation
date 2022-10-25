@@ -9,7 +9,7 @@ from utils import process_image
 
 
 class ObservationDataset(DGLBuiltinDataset):
-    def __init__(self, data_dir, kind, feature_extractor, model, capacity=1, transform=None):
+    def __init__(self, data_dir, kind, feature_extractor, model, repeats=1, transform=None):
         self.data_dir = data_dir
         self.kind = kind
         self.feature_extractor = feature_extractor
@@ -17,7 +17,7 @@ class ObservationDataset(DGLBuiltinDataset):
         self.photo_names = {}
         self.transform = transform
         self.train_test_ratio = 0.8
-        self.capacity = capacity
+        self.repeats = repeats
         super().__init__(name='obs',
                          url=None)
     
@@ -65,4 +65,4 @@ class ObservationDataset(DGLBuiltinDataset):
         return graph, idx
     
     def __len__(self):
-        return self.capacity * len(self.photo_names)
+        return self.repeats * len(self.photo_names)
